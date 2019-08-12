@@ -1,79 +1,7 @@
 <template>
   <div class="main-body">
     <div class="content">
-      <p>222</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>222</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>222</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>222</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>222</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
-      <p>111</p>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -87,20 +15,18 @@ export default {
       list1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     };
   },
-  methods: {
-    // handleReachBottom() {
-    //   console.log('bottom')
-    //   return new Promise(resolve => {
-    //     setTimeout(() => {
-    //       const last = this.list1[this.list1.length - 1];
-    //       for (let i = 1; i < 11; i++) {
-    //         this.list1.push(last + i);
-    //       }
-    //       resolve();
-    //     }, 2000);
-    //   });
-    // }
-  }
+  created() {
+    let formData = '再见杰克'
+    this.$http
+      .get("https://api.apiopen.top/searchMusic?name="+formData)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  methods: {}
 };
 </script>
 
@@ -113,6 +39,7 @@ export default {
   /* overflow-y: scroll; */
 }
 .content {
+  height: 770px;
   margin: auto;
   background-color: #fff;
   color: #fff;

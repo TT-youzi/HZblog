@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+//封装axios，注册为全局组件
+import http from './utils/http'
+Vue.prototype.$http = http;
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 

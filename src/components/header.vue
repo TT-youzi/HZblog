@@ -5,8 +5,10 @@
       <ul>
         <li>Welcome To My World</li>
         <li>Vlog</li>
-        <li>食谱</li>
-        <li>笔记</li>
+        <li>
+          <router-link to="/music">Music</router-link>
+        </li>
+        <li>个人文章</li>
         <li>食谱</li>
       </ul>
       <div class="lock">

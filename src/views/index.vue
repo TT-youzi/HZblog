@@ -2,10 +2,10 @@
   <div class="mian">
     <Header class="mian_header"></Header>
     <Row class="main_row">
-      <Col span="5" class="left">
+      <Col span="6" class="left">
         <user-info></user-info>
       </Col>
-      <Col span="15" class="center">
+      <Col span="14" class="center">
         <main-body></main-body>
       </Col>
       <Col span="4" class="right"></Col>
