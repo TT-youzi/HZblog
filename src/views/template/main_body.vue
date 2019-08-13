@@ -1,6 +1,6 @@
 <template>
   <div class="main-body">
-    <div class="content">
+    <div class="content animated fadeInLeft">
       <router-view></router-view>
     </div>
   </div>
@@ -16,15 +16,7 @@ export default {
     };
   },
   created() {
-    let formData = '再见杰克'
-    this.$http
-      .get("https://api.apiopen.top/searchMusic?name="+formData)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    
   },
   methods: {}
 };
@@ -39,7 +31,6 @@ export default {
   /* overflow-y: scroll; */
 }
 .content {
-  height: 770px;
   margin: auto;
   background-color: #fff;
   color: #fff;

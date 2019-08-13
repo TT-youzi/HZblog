@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import animated from 'animate.css'
 //封装axios，注册为全局组件
 import http from './utils/http'
 Vue.prototype.$http = http;
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 
 Vue.use(iView);
 Vue.use(mavonEditor)
+Vue.use(animated)
 new Vue({
   el: '#app',
   router,

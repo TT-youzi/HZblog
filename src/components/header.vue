@@ -4,12 +4,18 @@
       <img class="header_img" src="../assets/img/logo.png" alt />
       <ul>
         <li>Welcome To My World</li>
-        <li>Vlog</li>
-        <li>
-          <router-link to="/music">Music</router-link>
-        </li>
-        <li>个人文章</li>
-        <li>食谱</li>
+        <router-link to="/vlog">
+          <li class="animated bounceInDown">Vlog</li>
+        </router-link>
+        <router-link to="/article">
+          <li class="animated bounceInDown delay-1s">个人文章</li>
+        </router-link>
+        <router-link to="/music">
+          <li class="animated bounceInDown ">Music</li>
+        </router-link>
+        <router-link to="/foodlist">
+          <li class="animated bounceInDown delay-2s">食谱</li>
+        </router-link>
       </ul>
       <div class="lock">
         <span class="login">解锁</span>
@@ -58,12 +64,13 @@ export default {
   float: left;
   padding: 0px 30px;
   text-align: center;
+  color: #fff;
   cursor: pointer;
 }
 .header ul li:hover {
   background-color: #000;
   color: #fff;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .lock {
