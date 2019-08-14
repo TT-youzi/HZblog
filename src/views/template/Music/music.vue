@@ -1,12 +1,17 @@
 <template>
   <div class="wyyMusic">
     <div class="music_list">
-      <div class="list_item" v-for="item in playlists" :key="item.id">
+      <div
+        class="list_item"
+        v-for="item in playlists"
+        :key="item.id"
+        @click="handleClickItem(item)"
+      >
         <div class="img_box">
           <img :src="item.coverImgUrl" alt />
 
           <div class="playCount">
-            <Icon type="ios-headset-outline" size="20" />
+            <Icon type="md-headset" size="20" />
             <span>{{item.playCount}}</span>
           </div>
 
@@ -18,21 +23,29 @@
         </div>
         <p>{{item.name}}</p>
       </div>
-      <Page class="allpage" :current="current" :total="total" simple />
+      <Page
+        class="allpage"
+        :current="current"
+        :total="total"
+        simple
+        @on-change="this.handleChangePage"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import $globalVal from "../../../utils/global.js";
 export default {
   name: "",
   components: {},
   data() {
     return {
       playlists: "",
+      nowUpdateTime: "",
       lastUpdateTime: "", //当前最后一个歌单
       catlist: "", //分类
-      total: "",
+      total: 0,
       current: 1
     };
   },
@@ -40,6 +53,16 @@ export default {
     this.initData();
   },
   methods: {
+    handleClickItem(item) {
+      this.$router.push({
+        path: "/music/paly_list",
+        query: { listId: item.id }
+      });
+    },
+    handleChangePage(i) {
+      console.log(this.lastUpdateTime);
+      this.initData();
+    },
     initData() {
       //获取歌单分类
       // this.$http
@@ -55,12 +78,18 @@ export default {
       //获取歌单
       this.$Spin.show(); //加载中界面
       this.$http
-        .get("http://localhost:3000/top/playlist/highquality?before=&limit=12")
+        .get(
+          $globalVal.WyyBaseURL +
+            "/top/playlist/highquality?before=" +
+            this.lastUpdateTime +
+            "&limit=12"
+        )
         .then(res => {
           this.total = res.data.total;
           this.$Spin.hide(); //加载中界面消失
           this.playlists = res.data.playlists;
-          console.log(this.playlists);
+          this.lastUpdateTime = this.playlists[11].updateTime;
+          this.nowUpdateTime = this.playlists[0].updateTime;
         })
         .catch(err => {
           console.log(err);
@@ -75,7 +104,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 1.25rem /* 20/16 */;
   background-color: #f1f3f4;
 }
 .list_item {
@@ -90,9 +119,9 @@ export default {
   cursor: pointer;
 }
 .list_item:hover {
-  box-shadow: 2px 2px 20px 2px #ccc;
+  box-shadow: .125rem /* 2/16 */ .125rem /* 2/16 */ 1.25rem /* 20/16 */ .125rem /* 2/16 */ #ccc;
   position: relative;
-  left: 0.5px;
+  left: .03125rem /* 0.5/16 */;
   top: -0.5px;
 }
 .img_box {
@@ -117,7 +146,7 @@ export default {
   position: absolute;
   top: 0%;
   right: 0%;
-  padding: 5px;
+  padding: .3125rem /* 5/16 */;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0em;
@@ -126,52 +155,52 @@ export default {
 .playCount span {
   display: block;
   float: right;
-  height: 20px;
-  line-height: 20px;
-  padding: 2px;
+  height: 1.25rem /* 20/16 */;
+  line-height: 1.25rem /* 20/16 */;
+  padding: .125rem /* 2/16 */;
 }
 .playCount span:hover {
   color: azure;
 }
 .list_item p {
   color: #303133;
-  font-size: 14px;
-  padding: 10px;
+  font-size: .875rem /* 14/16 */;
+  padding: .625rem /* 10/16 */;
 }
 .creator {
   position: absolute;
-  bottom: 5px;
-  height: 40px;
+  bottom: .3125rem /* 5/16 */;
+  height: 2.5rem /* 40/16 */;
   width: 100%;
   background-color: #00000078;
-  line-height: 40px;
-  padding: 5px 10px;
+  line-height: 2.5rem /* 40/16 */;
+  padding: .3125rem /* 5/16 */ .625rem /* 10/16 */;
   white-space: nowrap;
 }
 .creator_img {
-  height: 30px !important;
-  width: 30px !important;
-  border-radius: 20px !important;
+  height: 1.875rem /* 30/16 */ !important;
+  width: 1.875rem /* 30/16 */ !important;
+  border-radius: 1.25rem /* 20/16 */ !important;
   float: left;
 }
 .creator span {
   display: block;
-  height: 30px;
-  line-height: 30px;
+  height: 1.875rem /* 30/16 */;
+  line-height: 1.875rem /* 30/16 */;
   float: left;
-  padding-left: 10px;
+  padding-left: .625rem /* 10/16 */;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: left;
-  width: 140px;
+  width: 8.75rem /* 140/16 */;
 }
 .creator_btn {
   float: right;
 }
 .ivu-btn >>> .ivu-icon {
-  margin-left: 3px !important;
-  margin-top: 2px !important;
+  margin-left: .1875rem /* 3/16 */ !important;
+  margin-top: .125rem /* 2/16 */ !important;
 }
 .allpage {
   margin: auto;

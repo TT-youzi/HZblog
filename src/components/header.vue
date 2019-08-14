@@ -3,7 +3,7 @@
     <div class="header">
       <img class="header_img" src="../assets/img/logo.png" alt />
       <ul>
-        <li>Welcome To My World</li>
+        <li>WELCOME</li>
         <router-link to="/vlog">
           <li class="animated bounceInDown">Vlog</li>
         </router-link>
@@ -39,30 +39,30 @@ export default {
   position: fixed;
   top: 0;
   z-index: 1;
-  height: 80px;
+  height: 5rem /* 80/16 */;
   width: 100%;
-  line-height: 80px;
+  line-height: 5rem /* 80/16 */;
   background-color: #000000a6;
-  border-bottom: 5px solid #000;
+  border-bottom: .3125rem /* 5/16 */ solid #000;
   background: url("../assets/img/aaaaa.png");
   background-size: 100%;
 }
 .header_img {
   float: left;
   height: 100%;
-  margin-left: 10px;
+  margin-left: .625rem /* 10/16 */;
 }
 .header ul {
   float: left;
-  height: 80px;
+  height: 5rem /* 80/16 */;
   text-align: center;
   width: 54.5%;
   margin-left: 21%;
 }
 .header ul li {
-  font-size: 12px;
+  font-size: .75rem /* 12/16 */;
   float: left;
-  padding: 0px 30px;
+  padding: 0rem /* 0/16 */ 1.875rem /* 30/16 */;
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -70,7 +70,7 @@ export default {
 .header ul li:hover {
   background-color: #000;
   color: #fff;
-  border-radius: 10px;
+  border-radius: .625rem /* 10/16 */;
 }
 
 .lock {
@@ -78,6 +78,6 @@ export default {
 }
 
 .login {
-  padding: 0px 15px;
+  padding: 0rem /* 0/16 */ .9375rem /* 15/16 */;
 }
 </style>

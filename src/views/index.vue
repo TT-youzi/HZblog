@@ -37,7 +37,7 @@ export default {
 
 .mian_header {
   width: 100%;
-  height: 80px;
+  height: 5rem /* 80/16 */;
   
 }
 

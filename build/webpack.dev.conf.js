@@ -45,6 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    // "vuepress-plugin-cat",
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),

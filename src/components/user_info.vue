@@ -92,14 +92,14 @@ export default {
 
 <style scoped>
 .user_info {
-  z-index: 1px;
+  z-index: .0625rem /* 1/16 */;
   float: right;
   width: 100%;
-  padding: 10px;
+  padding: .625rem /* 10/16 */;
   color: #fff;
 }
 .user_card {
-  height: 290px;
+  height: 18.125rem /* 290/16 */;
   background: hsla(0, 1%, 69%, 0.13) border-box;
   border-radius: 0.3em;
 }
@@ -108,28 +108,28 @@ export default {
 }
 .card_list {
   text-align: left;
-  margin-top: 20px;
+  margin-top: 1.25rem /* 20/16 */;
 }
 .card_list li {
-  line-height: 20px;
-  padding: 5px 20px;
+  line-height: 1.25rem /* 20/16 */;
+  padding: .3125rem /* 5/16 */ 1.25rem /* 20/16 */;
 }
 .card_list span {
-  margin-left: 5px;
+  margin-left: .3125rem /* 5/16 */;
 }
 .user_img {
-  height: 60px;
+  height: 3.75rem /* 60/16 */;
   float: left;
-  padding: 10px;
-  margin-left: 10px;
+  padding: .625rem /* 10/16 */;
+  margin-left: .625rem /* 10/16 */;
   width: 100%;
   text-align: left;
 }
 .user_name {
   display: block;
   float: right;
-  font-size: 14px;
-  padding: 20px 20px 0px 0px;
+  font-size: .875rem /* 14/16 */;
+  padding: 1.25rem /* 20/16 */ 1.25rem /* 20/16 */ 0rem /* 0/16 */ 0rem /* 0/16 */;
 }
 .carousel {
   width: 100%;
@@ -138,14 +138,14 @@ export default {
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  padding: 10px;
-  border-radius: 20px;
+  padding: .625rem /* 10/16 */;
+  border-radius: 1.25rem /* 20/16 */;
 }
 .select {
   /* background-color: red; */
 }
 .select ul li {
-  line-height: 50px;
+  line-height: 3.125rem /* 50/16 */;
   /* border-top: 1px solid #fff; */
   /* border-bottom: 1px solid#fff; */
 }
