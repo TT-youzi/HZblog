@@ -165,14 +165,14 @@ export default {
 <style scoped>
 .wyyMusic {
   min-height: 800px;
-  background-color: #f1f3f4;
+  background-color: #fff;
 }
 .music_list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 1.25rem /* 20/16 */;
-  background-color: #f1f3f4;
+  background-color: #fff;
 }
 .list_item {
   background: hsla(0, 1%, 69%, 0.13) border-box;
