@@ -1,6 +1,36 @@
 <template>
   <div class="wyyMusic">
-    <div class="music_list">
+    <div class="search_body">
+      <el-input
+        class="searchMus"
+        @keyup.enter.native="handleEnter"
+        @focus="handleFocus"
+        placeholder="请输入内容"
+        v-model="inputValue"
+        clearable
+      >
+        <el-button slot="append" @click="handleEnter" icon="el-icon-search"></el-button>
+      </el-input>
+      <div class="hot_select" v-if="hotShow">
+        <p>热门搜索：</p>
+        <el-link class="hot_dispare" type="primary" underline @click="handleBlur">收起</el-link>
+        <ul>
+          <li v-for="(item,index) in this.hotSelect" :key="index">
+            <el-tag
+              class="hot_tag"
+              @click="handleClickTag(item)"
+              size="small"
+              type="warning"
+              effect="plain"
+            >{{ item.first }}</el-tag>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class>
+      <song-table v-if="!musicListVisible" v-bind:inpVal="inputValue"></song-table>
+    </div>
+    <div class="music_list" v-if="musicListVisible">
       <div
         class="list_item"
         v-for="item in playlists"
@@ -36,9 +66,10 @@
 
 <script>
 import $globalVal from "../../../utils/global.js";
+import songTable from "../../../components/song_table";
 export default {
   name: "",
-  components: {},
+  components: { songTable },
   data() {
     return {
       playlists: "",
@@ -46,13 +77,35 @@ export default {
       lastUpdateTime: "", //当前最后一个歌单
       catlist: "", //分类
       total: 0,
-      current: 1
+      current: 1,
+      inputValue: "",
+      hotSelect: "",
+      hotShow: false,
+      musicListVisible: "true"
     };
   },
   created() {
     this.initData();
   },
+  mounted() {},
   methods: {
+    handleSelect(item) {
+      console.log(item);
+    },
+    handleClickTag(item) {
+      this.inputValue = item.first;
+      // this.inputValue = item.first;
+    },
+    handleEnter() {
+      this.hotShow = false;
+      this.musicListVisible = false;
+    },
+    handleFocus() {
+      this.hotShow = true;
+    },
+    handleBlur() {
+      this.hotShow = false;
+    },
     handleClickItem(item) {
       this.$router.push({
         path: "/music/paly_list",
@@ -94,12 +147,26 @@ export default {
         .catch(err => {
           console.log(err);
         });
+
+      this.$http
+        .get($globalVal.WyyBaseURL + "/search/hot")
+        .then(res => {
+          this.hotSelect = res.data.result.hots;
+          console.log(this.hotSelect);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
 </script>
 
 <style scoped>
+.wyyMusic {
+  min-height: 800px;
+  background-color: #f1f3f4;
+}
 .music_list {
   display: flex;
   flex-wrap: wrap;
@@ -119,9 +186,10 @@ export default {
   cursor: pointer;
 }
 .list_item:hover {
-  box-shadow: .125rem /* 2/16 */ .125rem /* 2/16 */ 1.25rem /* 20/16 */ .125rem /* 2/16 */ #ccc;
+  box-shadow: 0.125rem /* 2/16 */ 0.125rem /* 2/16 */ 1.25rem /* 20/16 */
+    0.125rem /* 2/16 */ #ccc;
   position: relative;
-  left: .03125rem /* 0.5/16 */;
+  left: 0.03125rem /* 0.5/16 */;
   top: -0.5px;
 }
 .img_box {
@@ -146,7 +214,7 @@ export default {
   position: absolute;
   top: 0%;
   right: 0%;
-  padding: .3125rem /* 5/16 */;
+  padding: 0.3125rem /* 5/16 */;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0em;
@@ -157,24 +225,24 @@ export default {
   float: right;
   height: 1.25rem /* 20/16 */;
   line-height: 1.25rem /* 20/16 */;
-  padding: .125rem /* 2/16 */;
+  padding: 0.125rem /* 2/16 */;
 }
 .playCount span:hover {
   color: azure;
 }
 .list_item p {
   color: #303133;
-  font-size: .875rem /* 14/16 */;
-  padding: .625rem /* 10/16 */;
+  font-size: 0.875rem /* 14/16 */;
+  padding: 0.625rem /* 10/16 */;
 }
 .creator {
   position: absolute;
-  bottom: .3125rem /* 5/16 */;
+  bottom: 0.3125rem /* 5/16 */;
   height: 2.5rem /* 40/16 */;
   width: 100%;
   background-color: #00000078;
   line-height: 2.5rem /* 40/16 */;
-  padding: .3125rem /* 5/16 */ .625rem /* 10/16 */;
+  padding: 0.3125rem /* 5/16 */ 0.625rem /* 10/16 */;
   white-space: nowrap;
 }
 .creator_img {
@@ -188,7 +256,7 @@ export default {
   height: 1.875rem /* 30/16 */;
   line-height: 1.875rem /* 30/16 */;
   float: left;
-  padding-left: .625rem /* 10/16 */;
+  padding-left: 0.625rem /* 10/16 */;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -199,11 +267,50 @@ export default {
   float: right;
 }
 .ivu-btn >>> .ivu-icon {
-  margin-left: .1875rem /* 3/16 */ !important;
-  margin-top: .125rem /* 2/16 */ !important;
+  margin-left: 0.1875rem /* 3/16 */ !important;
+  margin-top: 0.125rem /* 2/16 */ !important;
 }
 .allpage {
   margin: auto;
   color: #303133;
+}
+
+.search_body {
+  padding-top: 20px;
+  background-color: #fff;
+  width: 100%;
+  position: relative;
+  padding-bottom: 20px;
+}
+.searchMus {
+  width: 70%;
+  margin: 0px auto;
+}
+
+.hot_select {
+  position: absolute;
+  top: 60px;
+  left: 15%;
+  width: 70%;
+  margin: 0px auto;
+  padding: 20px;
+  z-index: 9999;
+  border: 1px solid #f3f3f3;
+  background-color: #fff;
+  color: #303133;
+}
+.hot_select p {
+  text-align: left;
+}
+.hot_tag {
+  float: left;
+  margin-top: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.hot_dispare {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 </style>
