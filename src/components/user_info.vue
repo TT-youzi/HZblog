@@ -66,14 +66,14 @@
         </CarouselItem>
       </Carousel>
 
-      <div class="select">
+      <!-- <div class="select">
         <ul>
           <li>搜索</li>
           <li>分类</li>
           <li>时间轴</li>
           <li>友情链接</li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -42,7 +42,6 @@ export default {
       this.$http
         .get($globalVal.WyyBaseURL + "/song/url?id=" + item.id)
         .then(res => {
-          console.log(res.data.data);
           this.videoUrl = res.data.data[0].url;
         })
         .catch(err => {
@@ -60,7 +59,6 @@ export default {
       this.$http
         .get($globalVal.WyyBaseURL + "/search?keywords=" + this.$props.inpVal)
         .then(res => {
-          console.log(res.data.result);
           this.searchData = res.data.result.songs;
         })
         .catch(err => {
