@@ -50,7 +50,7 @@
 
 <script>
 import $globalVal from "../../../utils/global.js";
-import fromData from "../../../utils/formDate";
+import DateUtils from "../../../utils/formDate";
 import SongTable from "../../../components/song_table";
 export default {
   name: "palyliatdetail",
@@ -89,10 +89,10 @@ export default {
         .get($globalVal.WyyBaseURL + "/playlist/detail?id=" + listId)
         .then(res => {
           console.log(res);
-          res.data.playlist.createTime = fromData.fmtDate(
+          res.data.playlist.createTime = DateUtils.fmtDate(
             res.data.playlist.createTime
           );
-          // res.data.playlist. = fromData.fmtDate(
+          // res.data.playlist. = fromData.DateUtils(
           //   res.data.playlist.createTime
           // );setTimes;
           this.playlistData = res.data.playlist;

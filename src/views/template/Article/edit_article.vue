@@ -68,12 +68,16 @@ export default {
       selectVal: "",
       selectList: [
         {
-          value: "New York",
-          label: "New York"
+          value: "专业类",
+          label: "专业类"
         },
         {
-          value: "London",
-          label: "London"
+          value: "日记",
+          label: "日记"
+        },
+        {
+          value: "小说",
+          label: "小说"
         }
       ]
     };
@@ -93,7 +97,7 @@ export default {
       };
       console.log(formData)
       this.$http
-        .post($globalVal.LocalHostURL + "/article/add", formData)
+        .post($globalVal.ServerBaseURL + "/article/add", formData)
         .then(res => {
           console.log(res.data);
         })

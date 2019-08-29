@@ -4,13 +4,15 @@
       <div class="aritcle_item" v-for="(item,index) in this.articleData" :key="index">
         <div class="aritcle_item_header">{{item.article_name}}</div>
         <div class="aritcle_item_info">
-          <span>{{item.article_publish_time}}</span>
+          <span>{{item.article_publish_time?DateUtil.fmtDate(item.article_publish_time):'111'}}</span>
           发布在
           <span>{{item.article_sort}}</span>
         </div>
         <div class="aritcle_item_summary">
-          <div class="markdown-body">
-          <h2><a id="22222_0"></a>22222</h2>
+          <div class="markdown-body" v-html="item.article_content">
+            <h2>
+              <a id="22222_0"></a>
+            </h2>
           </div>
           <a href>阅读全文</a>
         </div>
@@ -21,9 +23,10 @@
 
 <script>
 import $globalVal from "../../../utils/global.js";
+import DateUtil from "../../../utils/formDate";
 export default {
   name: "",
-  components: {},
+  components: { DateUtil },
   data() {
     return {
       articleData: ""
@@ -35,10 +38,19 @@ export default {
   methods: {
     initData() {
       this.$http
-        .post($globalVal.LocalHostURL + "/article/select")
+        .post($globalVal.ServerBaseURL + "/article/select")
         .then(res => {
+
           console.log(res.data.data);
-          this.articleData = res.data.data;
+          res.data.data.forEach(element => {
+            
+          });
+          // this.articleData = res.data.data.map((value, index, array) => {
+          //   console.log(value.article_publish_time)
+          //   console.log(array)
+          //     return array[index].article_publish_time
+          // });
+          // console.log(this.articleData)
         })
         .catch(err => {
           console.log(err);
@@ -50,7 +62,6 @@ export default {
 
 <style scoped>
 .aritcle {
-  height: 600px;
   background-color: #f1f3f4;
   color: #303133;
 }
