@@ -92,13 +92,8 @@ export default {
           res.data.playlist.createTime = DateUtils.fmtDate(
             res.data.playlist.createTime
           );
-          // res.data.playlist. = fromData.DateUtils(
-          //   res.data.playlist.createTime
-          // );setTimes;
           this.playlistData = res.data.playlist;
           console.log(this.playlistData);
-          // this.privilegesData = res.data.playlist;
-          // console.log(this.privilegesData);
         })
         .catch(err => {
           console.log(err);

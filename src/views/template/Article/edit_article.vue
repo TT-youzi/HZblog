@@ -5,17 +5,17 @@
         <Button class="edit_btn" @click="editVisible = true" type="primary">发布文章</Button>
         <!-- <div class="markdown-body">
           <h2><a id="22222_0"></a>22222</h2>
-        </div> -->
+        </div>-->
         <Modal v-model="editVisible" fullscreen title="发布文章" ok-text="确定发布" @on-ok="handleSend">
           <div class="edit_title">
             <!-- <span>题目：</span> -->
-            <Input class="edit_title_inp" v-model="inpValue" size="large" placeholder="Title:" />
+            <Input class="edit_title_inp" v-model="inpValue" size="large" placeholder="标题:" />
             <Select
               size="large"
               class="edit_select"
               v-model="selectVal"
               multiple
-              placeholder="sort:"
+              placeholder="分类:"
               :max-tag-count="2"
               :max-tag-placeholder="maxTagPlaceholder"
             >
@@ -26,6 +26,8 @@
               >{{ item.label }}</Option>
             </Select>
           </div>
+          <Input v-model="editSummary" type="textarea" placeholder="简介..." />
+
           <div>
             <mavon-editor
               v-model="editValue"
@@ -63,6 +65,7 @@ export default {
     return {
       editVisible: false,
       editValue: "",
+      editSummary: "",
       editValueHtml: "",
       inpValue: "",
       selectVal: "",
@@ -78,6 +81,9 @@ export default {
         {
           value: "小说",
           label: "小说"
+        },{
+          value: "一切只为有趣",
+          label: "一切只为有趣"
         }
       ]
     };
@@ -92,10 +98,10 @@ export default {
       let formData = {
         article_name: this.inpValue,
         article_sort: this.selectVal,
+        article_summary: this.editSummary,
         article_content: this.editValueHtml,
-        // article_publish_time: publishTime
       };
-      console.log(formData)
+      console.log(formData);
       this.$http
         .post($globalVal.ServerBaseURL + "/article/add", formData)
         .then(res => {

@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/index.vue'
+import IndexDetail from '@/views/index_detail.vue'
 import Music from '../views/template/Music/music.vue'
 import Article from '../views/template/Article/article.vue'
 import FoodList from '../views/template/FoodList/foodlist.vue'
 import Vlog from '../views/template/Vlog/vlog.vue'
 import PalyList from '../views/template/Music/play_list_detail.vue'
 import EditArticle from '../views/template/Article/edit_article.vue'
+import ArticleDetail from '../views/template/Article/article_detail.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -50,6 +52,15 @@ export default new Router({
       },
       component: EditArticle,
 
+    }]
+  }, {
+    path: '/index_detail',
+    name: 'IndexDetail',
+    component: IndexDetail,
+    children: [{
+      path: '/article_detail',
+      name: 'article_detail',
+      component: ArticleDetail,
     }]
   }]
 })

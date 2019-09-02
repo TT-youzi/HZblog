@@ -7,14 +7,27 @@ const fmtDate = (obj) => {
   var m = "0" + (date.getMonth() + 1);
 
   var d = "0" + date.getDate();
+
+  var h = "0" + date.getHours();
+
+  var min = "0" + date.getMinutes();
+
+  var s = "0" + date.getSeconds();
+
   // 参数二可以省略
   // substring() 用于提取字符串中 介于 两个指定下标之间的字符。
   return (
     y +
-    "-" +
+    "." +
     m.substring(m.length - 2, m.length) +
-    "-" +
-    d.substring(d.length - 2, d.length)
+    "." +
+    d.substring(d.length - 2, d.length) +
+    " " +
+    h.substring(h.length - 2, h.length) +
+    ":" +
+    min.substring(min.length - 2, min.length) +
+    ":" +
+    s.substring(s.length - 2, s.length)
   );
 }
 //获取日期差

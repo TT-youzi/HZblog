@@ -4,17 +4,13 @@
       <div class="aritcle_item" v-for="(item,index) in this.articleData" :key="index">
         <div class="aritcle_item_header">{{item.article_name}}</div>
         <div class="aritcle_item_info">
-          <span>{{item.article_publish_time?DateUtil.fmtDate(item.article_publish_time):'111'}}</span>
+          <span>{{item.article_publish_time}}</span>
           发布在
-          <span>{{item.article_sort}}</span>
+          <span>“{{item.article_sort}}”</span>
         </div>
         <div class="aritcle_item_summary">
-          <div class="markdown-body" v-html="item.article_content">
-            <h2>
-              <a id="22222_0"></a>
-            </h2>
-          </div>
-          <a href>阅读全文</a>
+          <div>{{item.article_summary}}</div>
+          <a @click="handleDetail(item.article_id)">阅读全文</a>
         </div>
       </div>
     </div>
@@ -29,28 +25,32 @@ export default {
   components: { DateUtil },
   data() {
     return {
-      articleData: ""
+      articleData: []
     };
   },
   created() {
     this.initData();
   },
   methods: {
+    handleDetail(articleId) {
+      this.$router.push({
+        path: "/article_detail",
+        query: { articleId: articleId }
+      });
+    },
     initData() {
       this.$http
         .post($globalVal.ServerBaseURL + "/article/select")
         .then(res => {
-
           console.log(res.data.data);
           res.data.data.forEach(element => {
-            
+            console.log(DateUtil.fmtDate(element.article_publish_time));
+            element.article_publish_time = DateUtil.fmtDate(
+              element.article_publish_time
+            );
+            this.articleData.push(element);
           });
-          // this.articleData = res.data.data.map((value, index, array) => {
-          //   console.log(value.article_publish_time)
-          //   console.log(array)
-          //     return array[index].article_publish_time
-          // });
-          // console.log(this.articleData)
+          console.log(this.articleData);
         })
         .catch(err => {
           console.log(err);
@@ -64,6 +64,7 @@ export default {
 .aritcle {
   background-color: #f1f3f4;
   color: #303133;
+  min-height: 600px;
 }
 
 .aritcle_item {
