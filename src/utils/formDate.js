@@ -12,7 +12,7 @@ const fmtDate = (obj) => {
 
   var min = "0" + date.getMinutes();
 
-  var s = "0" + date.getSeconds();
+  // var s = "0" + date.getSeconds();
 
   // 参数二可以省略
   // substring() 用于提取字符串中 介于 两个指定下标之间的字符。
@@ -25,9 +25,9 @@ const fmtDate = (obj) => {
     " " +
     h.substring(h.length - 2, h.length) +
     ":" +
-    min.substring(min.length - 2, min.length) +
-    ":" +
-    s.substring(s.length - 2, s.length)
+    min.substring(min.length - 2, min.length)
+    // ":" +
+    // s.substring(s.length - 2, s.length)
   );
 }
 //获取日期差

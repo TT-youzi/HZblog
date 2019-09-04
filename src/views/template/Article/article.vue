@@ -2,7 +2,7 @@
   <div>
     <div class="aritcle">
       <div class="aritcle_item" v-for="(item,index) in this.articleData" :key="index">
-        <div class="aritcle_item_header">{{item.article_name}}</div>
+        <div class="aritcle_item_header" @click="handleDetail(item.article_id)">{{item.article_name}}</div>
         <div class="aritcle_item_info">
           <span>{{item.article_publish_time}}</span>
           发布在
@@ -51,6 +51,7 @@ export default {
             this.articleData.push(element);
           });
           console.log(this.articleData);
+          sessionStorage.setItem('articleList', JSON.stringify(this.articleData));
         })
         .catch(err => {
           console.log(err);
@@ -62,7 +63,7 @@ export default {
 
 <style scoped>
 .aritcle {
-  background-color: #f1f3f4;
+  background-color: #fff;
   color: #303133;
   min-height: 600px;
 }
@@ -78,6 +79,7 @@ export default {
   letter-spacing: 0.01em;
   text-align: left;
   padding: 0px 20px;
+  cursor: pointer;
 }
 .aritcle_item_info {
   padding: 0px 20px;

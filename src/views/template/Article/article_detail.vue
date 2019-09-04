@@ -15,10 +15,10 @@
         <Divider />
         <div class="detail_body_footer">
           <ButtonGroup class="detail_body_footer_left" size="large">
-            <Button>
+            <Button @click="handleLastOne">
               <Icon type="ios-arrow-back"></Icon>上一篇
             </Button>
-            <Button>
+            <Button @click="handleNextOne">
               下一篇
               <Icon type="ios-arrow-forward"></Icon>
             </Button>
@@ -48,22 +48,60 @@ export default {
   components: {},
   data() {
     return {
-      currentArticle: "",
-      currArticleData: ""
+      currentArticleId: "",
+      currArticleData: "",
+      articleList: ""
     };
   },
   created() {
-    this.currentArticle = this.$route.query.articleId;
-    console.log(this.currentArticle);
+    this.currentArticleId = this.$route.query.articleId;
+    console.log(this.currentArticleId);
     this.initData();
+    this.articleList = JSON.parse(sessionStorage.getItem("articleList"));
+    console.log(this.articleList);
   },
   methods: {
+    handleLastOne() {
+      for (var i = 0; i < this.articleList.length; i++) {
+        if (this.articleList[i].article_id == this.currentArticleId) {
+          this.$router.push({
+            path: "/article_detail",
+            query: {
+              articleId: this.articleList[i - 1].article_id
+            }
+          });
+          this.reNewData();
+          return false;
+        }
+      }
+    },
+    handleNextOne() {
+      for (var i = 0; i < this.articleList.length; i++) {
+        if (this.articleList[i].article_id == this.currentArticleId) {
+          this.$router.push({
+            path: "/article_detail",
+            query: {
+              articleId: this.articleList[i + 1].article_id
+            }
+          });
+          this.reNewData();
+          return false;
+        }
+      }
+    },
+    reNewData() {
+      this.currentArticleId = this.$route.query.articleId;
+      this.currArticleData = this.articleList.find((item)=>{
+        return item.article_id == this.currentArticleId;
+      })
+    },
+
     handleClickTop() {
       window.scrollTo(0, 0);
     },
     initData() {
       let formData = {
-        articleId: this.currentArticle
+        articleId: this.currentArticleId
       };
       this.$http
         .post($globalVal.ServerBaseURL + "/article/detail", formData)
@@ -115,7 +153,7 @@ export default {
   padding: 20px;
   min-height: 560px;
 }
-.detail_body_footer{
+.detail_body_footer {
   height: 60px;
   line-height: 60px;
   background-color: #fff;

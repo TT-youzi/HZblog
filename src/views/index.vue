@@ -10,6 +10,7 @@
       </Col>
       <Col span="4" class="right"></Col>
     </Row>
+    <Footer class="mian_header" style="background-color:#fff;width:58.3%;margin-left:25%;"></Footer>
   </div>
 </template>
 
@@ -17,9 +18,10 @@
 import UserInfo from "@/components/user_info";
 import MainBody from "@/views/template/main_body";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 export default {
   name: "",
-  components: { Header, UserInfo, MainBody },
+  components: { Header, Footer, UserInfo, MainBody },
   data() {
     return {};
   }
@@ -38,7 +40,6 @@ export default {
 .mian_header {
   width: 100%;
   height: 5rem /* 80/16 */;
-  
 }
 
 .main_row {
