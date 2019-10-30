@@ -16,6 +16,7 @@ export default new Router({
     path: '/',
     name: 'Index',
     component: Index,
+    redirect: '/article',
     children: [{
       path: '/music',
       name: 'Music',
@@ -41,7 +42,7 @@ export default new Router({
       name: 'edit_article',
       beforeEnter: (to, from, next) => {
         // authkey 存在 进入该路由，不存在跳转到登陆页面
-        if (localStorage.getItem('pass')) {
+        if (sessionStorage.getItem('pass')) {
           next()
         } else {
           next('/article')

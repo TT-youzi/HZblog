@@ -18,7 +18,9 @@
     "iview-editor": "^1.1.1",
     "live2d-widget-model-hibiki": "^1.0.5",
     "live2d-widget-model-hijiki": "^1.0.5",
+    "markdown-it": "^10.0.0",
     "mavon-editor": "^2.7.5",
+    "video.js": "^7.6.5",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuepress-plugin-cat": "^1.0.3"

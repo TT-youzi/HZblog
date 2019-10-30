@@ -13,10 +13,13 @@
             <li>
               <Icon type="ios-planet" size="10" />
               <span>Location:</span>
+              <span>{{this.userInfo.Location}}</span>
             </li>
             <li>
               <Icon type="ios-planet" size="10" />
               <span>Aries:</span>
+              <span>{{this.userInfo.Aries}}</span>
+
             </li>
 
             <li>
@@ -28,15 +31,16 @@
                   :delay="500"
                   max-width="250px"
                   placement="top-start"
-                  content="https://www.linkedin.com/in/huizhong-zhang-30828a131/"
+                  :content="this.userInfo.Linkedln"
                 >
-                  <a href="https://www.linkedin.com/in/huizhong-zhang-30828a131/">link is here</a>
+                  <a :href="this.userInfo.Linkedln">link is here</a>
                 </Tooltip>
               </span>
             </li>
             <li>
               <Icon type="logo-whatsapp" size="10" />
               <span>Email:</span>
+              <span>{{this.userInfo.Email}}</span>
             </li>
             <li></li>
           </ul>
@@ -73,29 +77,49 @@
           <li>时间轴</li>
           <li>友情链接</li>
         </ul>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
+import $globalVal from "@/utils/global.js";
 export default {
   name: "",
   components: {},
   data() {
     return {
-      value1: 0
+      value1: 0,
+      userInfo:'',
+      Linkurl:'xxx'
     };
+  },
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .post($globalVal.ServerBaseURL + "/card/selectCard")
+        .then(res => {
+          console.log(res.data.data[0]);
+          this.userInfo = res.data.data[0]
+          this.Linkurl = this.userInfo.Linkedln;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
 
 <style scoped>
 .user_info {
-  z-index: .0625rem /* 1/16 */;
+  z-index: 0.0625rem /* 1/16 */;
   float: right;
   width: 100%;
-  padding: .625rem /* 10/16 */;
+  padding: 0.625rem /* 10/16 */;
   color: #fff;
 }
 .user_card {
@@ -112,24 +136,25 @@ export default {
 }
 .card_list li {
   line-height: 1.25rem /* 20/16 */;
-  padding: .3125rem /* 5/16 */ 1.25rem /* 20/16 */;
+  padding: 0.3125rem /* 5/16 */ 1.25rem /* 20/16 */;
 }
 .card_list span {
-  margin-left: .3125rem /* 5/16 */;
+  margin-left: 0.3125rem /* 5/16 */;
 }
 .user_img {
   height: 3.75rem /* 60/16 */;
   float: left;
-  padding: .625rem /* 10/16 */;
-  margin-left: .625rem /* 10/16 */;
+  padding: 0.625rem /* 10/16 */;
+  margin-left: 0.625rem /* 10/16 */;
   width: 100%;
   text-align: left;
 }
 .user_name {
   display: block;
   float: right;
-  font-size: .875rem /* 14/16 */;
-  padding: 1.25rem /* 20/16 */ 1.25rem /* 20/16 */ 0rem /* 0/16 */ 0rem /* 0/16 */;
+  font-size: 0.875rem /* 14/16 */;
+  padding: 1.25rem /* 20/16 */ 1.25rem /* 20/16 */ 0rem /* 0/16 */ 0rem
+    /* 0/16 */;
 }
 .carousel {
   width: 100%;
@@ -138,7 +163,7 @@ export default {
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  padding: .625rem /* 10/16 */;
+  padding: 0.625rem /* 10/16 */;
   border-radius: 1.25rem /* 20/16 */;
 }
 .select {

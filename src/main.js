@@ -14,12 +14,22 @@ import http from './utils/http'
 Vue.prototype.$http = http;
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
-
+//视频插件
+import Video from 'video.js'
+import 'video.js/dist/video-js.css'
+Vue.prototype.$video = Video;
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(iView);
 Vue.use(mavonEditor)
 Vue.use(animated)
+//解决 vue-router报错Uncaught (in promise) undefined
+import Router from 'vue-router'
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 new Vue({
   el: '#app',
   router,
@@ -28,4 +38,3 @@ new Vue({
   },
   template: '<App/>'
 })
-

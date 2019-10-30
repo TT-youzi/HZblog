@@ -10,7 +10,7 @@
       </Col>
       <Col span="4" class="right"></Col>
     </Row>
-    <Footer class="mian_header" style="background-color:#fff;width:58.3%;margin-left:25%;"></Footer>
+    <Footer class="mian_header" style="background-color:#fff;width:58.35%;margin-left:25%;"></Footer>
   </div>
 </template>
 

@@ -54,14 +54,34 @@ export default {
   },
   methods: {
     handleLock() {
-      this.modalVisible = true;
+      let temp = sessionStorage.getItem("pass");
+      console.log(temp);
+      if (temp) {
+        this.$Notice.success({
+          title: "已认证",
+          desc: "The desc will hide when you set render.",
+          render: h => {
+            return h("span", [
+              "权限通过，欢迎登录",
+              h("a", "后台发布文章系统")
+            ]);
+          }
+        });
+        console.log('dao')
+        this.$router.push({
+          path: "/article/edit_article"
+        });
+        console.log('dao')
+
+      } else {
+        this.modalVisible = true;
+      }
     },
     handleOK() {
       setTimeout(() => {
         this.modalVisible = false;
-
         if (this.inpValue === $globalVal.KEY) {
-          localStorage.setItem("pass", "true");
+          sessionStorage.setItem("pass", "true");
           this.$Notice.success({
             title: "认证成功",
             desc: "The desc will hide when you set render.",
@@ -77,8 +97,11 @@ export default {
             title: "认证失败",
             desc: "sorry，认证key错误 :）"
           });
+          this.$router.push({
+            path: "/article"
+          });
         }
-      }, 2000);
+      }, 1000);
     }
   }
 };
